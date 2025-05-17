@@ -1,0 +1,6 @@
+@heater_backend_HostAddress = http://localhost:5171
+
+GET {{heater_backend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
