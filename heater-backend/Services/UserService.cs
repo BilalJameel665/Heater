@@ -1,5 +1,4 @@
 using heater_backend.Data;
-using heater_backend.Data.Models;
 using heater_backend.Models;
 
 namespace heater_backend.Services;
@@ -12,14 +11,12 @@ public class UserService(HeaterDbContext _db)
         await _db.SaveChangesAsync();
         return user;
     }
-    public async Task<User?> UpdateUserEmailAsync(Guid userId, string email)
+    public async Task<User> UpdateUserAsync(User user)
     {
-        var user = await _db.Users.FindAsync(userId);
-        if (user is null) return null;
-
-        user.Email = email;
+        _db.Users.Update(user);
         await _db.SaveChangesAsync();
         return user;
+
     }
 
 }
