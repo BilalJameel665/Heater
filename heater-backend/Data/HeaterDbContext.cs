@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using heater_backend.Models;
 
 namespace heater_backend.Data
 {
@@ -8,7 +9,10 @@ namespace heater_backend.Data
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			base.OnModelCreating(modelBuilder);
+			modelBuilder.Entity<Post>(entity =>
+			{
+				entity.OwnsOne(p => p.Metrics);
+			});
 		}
 	}
 }

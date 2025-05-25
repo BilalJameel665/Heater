@@ -16,13 +16,29 @@ namespace heater_backend.Models
 
 		[Required]
 		public User Author { get; set; }
+
 		[Required]
 		public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
 		[Required]
-		public required Metrics Metrics { get; set; }
+		public Metrics Metrics { get; set; } = new Metrics();
 
 		public ICollection<Comment> Comments { get; set; } = [];
+	}
 
+
+	[Owned]
+	class Metrics
+	{
+		[Required]
+		public int Likes { get; set; } = 0;
+		[Required]
+		public int CommentCount { get; set; } = 0;
+		[Required]
+		public int Repost { get; set; } = 0;
+		[Required]
+		public int Views { get; set; } = 0;
+		[Required]
+		public int Dislikes { get; set; } = 0;
 	}
 }
