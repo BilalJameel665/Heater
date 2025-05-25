@@ -15,7 +15,7 @@ namespace heater_backend.Models
 		public string Text { get; set; } = string.Empty;
 
 		[Required]
-		public User Author { get; set; }
+		public required User Author { get; set; }
 
 		[Required]
 		public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
