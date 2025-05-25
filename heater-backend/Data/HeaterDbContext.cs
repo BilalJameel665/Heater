@@ -12,7 +12,6 @@ namespace heater_backend.Data
 		public DbSet<Comment> Comments { get; set; }
 
 
-
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<Post>(entity =>
