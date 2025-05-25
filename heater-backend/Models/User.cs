@@ -23,9 +23,8 @@ namespace heater_backend.Models
 
         [Required]
         public DateTime DateOfBirth { get; set; }
-        
-        [Required]
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow
-    ;
+
+		[Required]
+		public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
 }
