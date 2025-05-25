@@ -1,14 +1,14 @@
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
 
 namespace heater_backend.Models
 {
-	class Post
+	public class Post
 	{
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		[Key]
-		public Guid Id { get; set; }
+		[Required]
+		public string Id { get; set; } = null!;
 
 		[Required]
 		[MaxLength(500)]
@@ -28,7 +28,7 @@ namespace heater_backend.Models
 
 
 	[Owned]
-	class Metrics
+	public class Metrics
 	{
 		[Required]
 		public int Likes { get; set; } = 0;

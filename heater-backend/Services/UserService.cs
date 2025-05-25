@@ -14,7 +14,7 @@ public class UserService(HeaterDbContext _db)
     }
     public async Task<User?> UpdateUserEmailAsync(Guid userId, string email)
     {
-        var user = await _db.FindAsync(userId);
+        var user = await _db.Users.FindAsync(userId);
         if (user is null) return null;
 
         user.Email = email;

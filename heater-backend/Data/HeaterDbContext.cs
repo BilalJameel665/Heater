@@ -7,9 +7,12 @@ namespace heater_backend.Data
 	{
 		public HeaterDbContext(DbContextOptions<HeaterDbContext> options) : base(options) { }
 
-        public object Users { get; internal set; }
+		public DbSet<User> Users { get; set; }
+		public DbSet<Post> Posts { get; set; }
+		public DbSet<Comment> Comments { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<Post>(entity =>
 			{
