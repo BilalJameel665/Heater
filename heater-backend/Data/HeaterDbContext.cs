@@ -7,7 +7,9 @@ namespace heater_backend.Data
 	{
 		public HeaterDbContext(DbContextOptions<HeaterDbContext> options) : base(options) { }
 
-		protected override void OnModelCreating(ModelBuilder modelBuilder)
+        public object Users { get; internal set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<Post>(entity =>
 			{
