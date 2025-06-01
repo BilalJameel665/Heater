@@ -41,4 +41,13 @@ namespace heater_backend.Models
 		[Required]
 		public int Dislikes { get; set; } = 0;
 	}
+
+
+	public class Comment : Post
+	{
+		[Required]
+		public required Post ParentPost { get; set; }
+	}
+
 }
+
