@@ -18,13 +18,19 @@ builder.Services.AddScoped<UserService>();
 
 var app = builder.Build();
 
+if (app.Environment.IsProduction())
+{
+    app.UseHttpsRedirection();
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
 	app.MapOpenApi();   // Expose OpenAPI docs only in Development
 }
 
-var frontendPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "heater-frontend", "public");
+
+var frontendPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "heater-frontend", "dist");
 
 
 app.UseStaticFiles(new StaticFileOptions
@@ -33,7 +39,6 @@ app.UseStaticFiles(new StaticFileOptions
 	RequestPath = ""
 });
 
-app.UseHttpsRedirection();
 
 //This route is for Creating user
 app.MapPost("/api/users", async (User user, UserService userService) =>
