@@ -1,3 +1,5 @@
+let loggedIn, userId, userName : any;
+
 export default function Nav() {
 	return (
 		<>
