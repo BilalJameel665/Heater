@@ -2,6 +2,7 @@ using heater_backend.Data;
 using heater_backend.Services;
 using heater_backend.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,8 +21,17 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();   // Expose OpenAPI docs only in Development
+	app.MapOpenApi();   // Expose OpenAPI docs only in Development
 }
+
+var frontendPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "heater-frontend", "public");
+
+
+app.UseStaticFiles(new StaticFileOptions
+{
+	FileProvider = new PhysicalFileProvider(frontendPath),
+	RequestPath = ""
+});
 
 app.UseHttpsRedirection();
 
@@ -67,5 +77,10 @@ app.MapDelete("/api/posts/{id}", async (string id, PostService postService) =>
 	return Results.StatusCode(204);
 });
 
+app.MapFallback((context) =>
+{
+	context.Response.ContentType = "text/html";
+	return context.Response.SendFileAsync(Path.Combine(frontendPath, "index.html"));
+});
 
 app.Run();
