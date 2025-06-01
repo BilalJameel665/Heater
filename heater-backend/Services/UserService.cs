@@ -1,5 +1,6 @@
 using heater_backend.Data;
 using heater_backend.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace heater_backend.Services;
 
@@ -17,10 +18,13 @@ public class UserService(HeaterDbContext _db)
         await _db.SaveChangesAsync();
         return user;
     }
-    public async void DeleteUserAsync(User user)
+    public async Task DeleteUserAsync(User user)
     {
         _db.Users.Remove(user);
         await _db.SaveChangesAsync();
     }
-
+    public async Task<User?> GetUserAsync(Guid id)
+    {
+        return await _db.Users.FirstOrDefaultAsync(user => user.Id == id);
+    }
 }
