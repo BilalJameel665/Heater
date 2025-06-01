@@ -26,8 +26,6 @@ namespace heater_backend.Services
 			return post;
 		}
 
-
-
 		public async Task DeletePostAsync(Post post)
 		{
 			_db.Posts.Remove(post);

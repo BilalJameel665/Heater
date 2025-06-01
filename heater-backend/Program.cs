@@ -26,7 +26,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 
-app.MapPost("/api/posts/create", async (Post post, PostService postService) =>
+app.MapPost("/api/posts/", async (Post post, PostService postService) =>
 {
 	await postService.CreatePostAsync(post);
 
