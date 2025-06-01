@@ -81,6 +81,7 @@ app.MapGet("/api/users/{id}", async (Guid id, UserService userService) =>
         {
             return Results.NotFound($"User with ID {id} not found.");
         }
+
         return Results.Ok(user);
     }
     catch (Exception ex)
