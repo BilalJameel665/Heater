@@ -16,7 +16,11 @@ public class UserService(HeaterDbContext _db)
         _db.Users.Update(user);
         await _db.SaveChangesAsync();
         return user;
-
+    }
+    public async void DeleteUserAsync(User user)
+    {
+        _db.Users.Remove(user);
+        await _db.SaveChangesAsync();
     }
 
 }
