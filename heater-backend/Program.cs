@@ -20,7 +20,7 @@ var app = builder.Build();
 
 if (app.Environment.IsProduction())
 {
-    app.UseHttpsRedirection();
+	app.UseHttpsRedirection();
 }
 
 // Configure the HTTP request pipeline.
@@ -56,99 +56,130 @@ app.MapPost("/api/users", async (User user, UserService userService) =>
 });
 
 //This is the route for updating user values
-app.MapPut("/api/users/{id}", async (Guid id,User user, UserService userService) =>
+app.MapPut("/api/users/{id}", async (Guid id, User user, UserService userService) =>
 {
-    try
-    {
-        var existingUser = await userService.GetUserAsync(id);
-        if (existingUser == null)
-        {
-            return Results.NotFound($"User with ID {id} not found.");
-        }
-        user.Id = id;
+	try
+	{
+		var existingUser = await userService.GetUserAsync(id);
+		if (existingUser == null)
+		{
+			return Results.NotFound($"User with ID {id} not found.");
+		}
+		user.Id = id;
 
-        var updatedUser = await userService.UpdateUserAsync(user);
-        return Results.Ok(updatedUser);
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine(ex.Message);
-        return Results.Problem("An error occurred while updating the user.");
-    }
+		var updatedUser = await userService.UpdateUserAsync(user);
+		return Results.Ok(updatedUser);
+	}
+	catch (Exception ex)
+	{
+		Console.WriteLine(ex.Message);
+		return Results.Problem("An error occurred while updating the user.");
+	}
 });
 //This route is to retrieve the user
 app.MapGet("/api/users/{id}", async (Guid id, UserService userService) =>
 {
-    try
-    {
-        var user = await userService.GetUserAsync(id);
-        if (user == null)
-        {
-            return Results.NotFound($"User with ID {id} not found.");
-        }
+	try
+	{
+		var user = await userService.GetUserAsync(id);
+		if (user == null)
+		{
+			return Results.NotFound($"User with ID {id} not found.");
+		}
 
-        return Results.Ok(user);
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine(ex.Message);
-        return Results.Problem("An error occurred while retrieving the user.");
-    }
+		return Results.Ok(user);
+	}
+	catch (Exception ex)
+	{
+		Console.WriteLine(ex.Message);
+		return Results.Problem("An error occurred while retrieving the user.");
+	}
 });
 
 // This is the route to delete the user
 app.MapDelete("/api/users/{id}", async (Guid id, UserService userService) =>
 {
-    var existingUser = await userService.GetUserAsync(id);
-    if (existingUser == null)
-    {
-        return Results.NotFound($"User with ID {id} not found.");
-    }
+	var existingUser = await userService.GetUserAsync(id);
+	if (existingUser == null)
+	{
+		return Results.NotFound($"User with ID {id} not found.");
+	}
 
-    await userService.DeleteUserAsync(existingUser);
-    return Results.NoContent();
+	await userService.DeleteUserAsync(existingUser);
+	return Results.NoContent();
 });
 
-	
+app.MapGet("/api/posts/{id}", async (string id, PostService postService) =>
+{
+	try
+	{
+		var post = await postService.GetPostAsync(id);
+		if (post == null)
+		{
+			return Results.NotFound(new { error = $"Post with {id} doesn't exist" });
+		}
+
+		return Results.Ok(post);
+	}
+	catch
+	{
+		return Results.BadRequest(new { error = "Could not get post" });
+	}
+});
+
 app.MapPost("/api/posts/", async (Post post, PostService postService) =>
 {
-	await postService.CreatePostAsync(post);
+	try
+	{
+		await postService.CreatePostAsync(post);
+		return Results.Created($"/api/posts/{post.Id}", post);
+	}
+	catch
+	{
+		return Results.BadRequest(new { error = "Could not create post" });
+	}
 
 });
 
 app.MapPut("/api/posts/{id}", async (string id, Post post, PostService postService) =>
 {
 
-	if (await postService.GetPostAsync(id) == null)
+	try
 	{
-		return Results.BadRequest("Post doesnt exist");
+		if (await postService.GetPostAsync(id) == null)
+		{
+			return Results.BadRequest(new { error = "Post doesn't exist" });
+		}
+
+		var p = await postService.UpdatePostAsync(post);
+		return Results.Ok(p);
 	}
-
-	var p = await postService.UpdatePostAsync(post);
-
-	return Results.Ok(p);
+	catch
+	{
+		return Results.BadRequest(new { error = "Could not update the post" });
+	}
 });
 
-app.MapGet("/api/posts/{id}", async (string id, PostService postService) =>
-{
 
-	var post = await postService.GetPostAsync(id);
-
-	return Results.Ok(post);
-});
 
 app.MapDelete("/api/posts/{id}", async (string id, PostService postService) =>
 {
-	var post = await postService.GetPostAsync(id);
-
-	if (post == null)
+	try
 	{
-		return Results.BadRequest("Post doesn't exist");
+		var post = await postService.GetPostAsync(id);
+
+		if (post == null)
+		{
+			return Results.NotFound(new { error = $"Post with {id} doesn't exist" });
+		}
+		await postService.DeletePostAsync(post);
+		return Results.NoContent();
+	}
+	catch
+	{
+		return Results.BadRequest();
 	}
 
-	await postService.DeletePostAsync(post);
-
-	return Results.StatusCode(204);
 });
 
 app.MapFallback((context) =>
