@@ -1,14 +1,18 @@
+using System.Runtime.CompilerServices;
 using heater_backend.Data;
 using heater_backend.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace heater_backend.Services;
 
 public class UserService(HeaterDbContext _db)
 {
-    public async Task<User> CreateUserAsync(User user)
-    {
-        await _db.AddAsync(user);
+    public async Task<User> CreateUserAsync(User user) 
+    {   
+        var _hasher = new PasswordHasher<User>();
+        user.Password = _hasher.HashPassword(user, user.Password);
+        await _db.Users.AddAsync(user);
         await _db.SaveChangesAsync();
         return user;
     }
