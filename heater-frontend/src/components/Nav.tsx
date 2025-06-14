@@ -1,9 +1,10 @@
+import styles from './Nav.module.css';
 let loggedIn, userId, userName : any;
 
 export default function Nav() {
 	return (
 		<>
-			<nav>
+			<nav className={styles.nav}>
 				{/* display profile button if logged in*/}
 				{loggedIn ? (
 					<>
