@@ -44,7 +44,7 @@ app.UseStaticFiles(new StaticFileOptions
 app.MapPost("/api/users", async (User user, UserService userService) =>
 {
 	try
-	{
+	{   
 		var newUser = await userService.CreateUserAsync(user);
 		return Results.Created($"/api/users/{newUser.Id}", newUser);
 	}
