@@ -8,8 +8,8 @@ namespace heater_backend.Services;
 
 public class UserService(HeaterDbContext _db)
 {
-    public async Task<User> CreateUserAsync(User user) 
-    {   
+    public async Task<User> CreateUserAsync(User user)
+    {
         var _hasher = new PasswordHasher<User>();
         user.Password = _hasher.HashPassword(user, user.Password);
         await _db.Users.AddAsync(user);
@@ -30,5 +30,15 @@ public class UserService(HeaterDbContext _db)
     public async Task<User?> GetUserAsync(Guid id)
     {
         return await _db.Users.FirstOrDefaultAsync(user => user.Id == id);
+    }
+    public async Task<User?> AuthenticateUserAsyncLogin(string email, string password)
+    {
+        var user = await _db.Users.FirstOrDefaultAsync(user => user.Email == email);
+        if (user == null) return null;
+
+        var _hasher = new PasswordHasher<User>();
+        var result = _hasher.VerifyHashedPassword(user, user.Password, password);
+
+        return result == PasswordVerificationResult.Success ? user : null;
     }
 }

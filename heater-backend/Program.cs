@@ -109,6 +109,18 @@ app.MapDelete("/api/users/{id}", async (Guid id, UserService userService) =>
 	return Results.NoContent();
 });
 
+// this is the route to authenticate/login a user 
+app.MapPost("/api/user/login", async (User user, UserService userService) =>
+{
+    var loginUser = await userService.AuthenticateUserAsyncLogin(user.Email, user.Password);
+
+    if (loginUser == null)
+        return Results.Unauthorized();
+
+	// REPLACE THIS WITH A TOKEN RETURN
+	return Results.Ok(new { loginUser.Id, loginUser.Username, loginUser.Email });
+});
+
 app.MapGet("/api/posts/{id}", async (string id, PostService postService) =>
 {
 	try
