@@ -110,7 +110,7 @@ app.MapDelete("/api/users/{id}", async (Guid id, UserService userService) =>
 });
 
 // this is the route to authenticate/login a user 
-app.MapPost("/api/user/login", async (User user, UserService userService) =>
+app.MapPost("/api/auth/login", async (User user, UserService userService) =>
 {
     var loginUser = await userService.AuthenticateUserAsyncLogin(user.Email, user.Password);
 
