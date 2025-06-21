@@ -113,12 +113,13 @@ app.MapDelete("/api/users/{id}", async (Guid id, UserService userService) =>
 app.MapPost("/api/auth/login", async (User user, UserService userService) =>
 {
     var loginUser = await userService.AuthenticateUserAsyncLogin(user.Email, user.Password);
-
+	Console.WriteLine("hello this is the test");
+	Console.WriteLine(user.Password);
     if (loginUser == null)
         return Results.Unauthorized();
 
 	// REPLACE THIS WITH A TOKEN RETURN
-	return Results.Ok(new { loginUser.Id, loginUser.Username, loginUser.Email });
+	return Results.Ok(new { loginUser.Id, loginUser.Username, loginUser.Email, loginUser.Password });
 });
 
 app.MapGet("/api/posts/{id}", async (string id, PostService postService) =>

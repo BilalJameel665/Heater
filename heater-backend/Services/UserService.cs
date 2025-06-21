@@ -31,14 +31,19 @@ public class UserService(HeaterDbContext _db)
     {
         return await _db.Users.FirstOrDefaultAsync(user => user.Id == id);
     }
-    public async Task<User?> AuthenticateUserAsyncLogin(string email, string password)
+    public async Task<User?> AuthenticateUserAsyncLogin(string Email, string Password)
     {
-        var user = await _db.Users.FirstOrDefaultAsync(user => user.Email == email);
-        if (user == null) return null;
+        var user = await _db.Users.FirstOrDefaultAsync(user => user.Email == Email);
+        if (user == null) {
+            Console.WriteLine("User not found.");
+            return null;
+        }
+        var hasher = new PasswordHasher<User>();
+        var result = hasher.VerifyHashedPassword(user, user.Password, Password);
 
-        var _hasher = new PasswordHasher<User>();
-        var result = _hasher.VerifyHashedPassword(user, user.Password, password);
+        Console.WriteLine($"Verification result: {result}");
 
         return result == PasswordVerificationResult.Success ? user : null;
     }
+
 }
