@@ -1,4 +1,5 @@
 import styles from "./Nav.module.css";
+import { Link } from "react-router";
 let loggedIn, userId, userName: any;
 
 export default function Nav() {
@@ -16,8 +17,8 @@ export default function Nav() {
 				) : (
 					<>
 						<div className={styles["nav-right"]}>
-							<a href="/login" className={styles["nav-button"]}>Log In</a>
-							<a href="/signup" className={styles["nav-button"]}>Sign Up</a>
+							<Link to="/login" className={styles["nav-button"]}>Log In</Link>
+							<Link to="/signup" className={styles["nav-button"]}>Sign Up</Link>
 						</div>
 					</>
 				)}
