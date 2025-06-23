@@ -1,5 +1,46 @@
-*, *::before, *::after {
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	/* Colour and theme variables */
+	--colour-background: #FFFFFF;
+	--colour-surface: #bdcedf;
+
+	--colour-primary: #2882e2;
+	--colour-primary-hover: #287bd4;
+
+	--colour-secondary: #6c757d;
+	--colour-secondary-hover: #53606b;
+
+	--colour-accent: #e83e8c;
+	--colour-accent-hover: #b14075;
+	
+	--colour-danger: #dc3545;
+	--colour-danger-hover: #b93c49;
+
+}
+
+.dark-theme {
+	/* Change global colour variables for dark theme */
+	/* --colour-background: #FFFFFF;
+	--colour-surface: #007bff;
+
+	--colour-primary: #007bff;
+	--colour-primary-hover: #116dce;
+
+	--colour-secondary: #6c757d;
+	--colour-secondary-hover: #53606b;
+
+	--colour-accent: #e83e8c;
+	--colour-accent-hover: #b14075;
+	
+	--colour-danger: #dc3545;
+	--colour-danger-hover: #b93c49; */
+
+	
 }

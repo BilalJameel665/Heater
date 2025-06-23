@@ -1,4 +1,41 @@
+
+
 .nav {
 	display: flex;
-	background-color: green;
+	background-color: var(--colour-surface);
+	padding: 20px 40px;
+	gap: 10px;
+	justify-content: space-between;
+}
+
+.navtitle,
+.nav-button {
+	display: inline-block;
+	text-decoration: none;
+	border-radius: 10px;
+	color: var(--text-colour)
+}
+
+.nav-button {
+	display: inline-block;
+	width: fit-content;
+	min-width: 110px;
+	text-align: center;
+	padding: 10px 0;
+	background-color: var(--colour-primary);
+}
+
+.nav-button:hover {
+	background-color: var(--colour-primary-hover);
+	transform: translateY(-1px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.nav-right {
+	display: flex;
+	gap: 20px;
+}
+
+.navtitle {
+	font-size: 2rem;
 }
