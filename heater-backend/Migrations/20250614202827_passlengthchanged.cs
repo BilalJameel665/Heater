@@ -5,7 +5,7 @@
 namespace heater_backend.Migrations
 {
     /// <inheritdoc />
-    public partial class passlengthchanged : Migration
+    public partial class PassLengthChanged : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

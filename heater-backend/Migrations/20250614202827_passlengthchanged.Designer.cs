@@ -13,7 +13,7 @@ namespace heater_backend.Migrations
 {
     [DbContext(typeof(HeaterDbContext))]
     [Migration("20250614202827_passlengthchanged")]
-    partial class passlengthchanged
+    partial class PassLengthChanged
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
