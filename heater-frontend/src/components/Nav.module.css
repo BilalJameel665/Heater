@@ -21,9 +21,17 @@
 	width: fit-content;
 	min-width: 110px;
 	text-align: center;
+	font-weight: 600;
 	padding: 10px 0;
-	background-color: var(--colour-primary);
+	background-image: var(--colour-primary);
+	color: white;
+	text-shadow:
+		-1px -1px 0 black,
+		 1px -1px 0 black,
+		-1px  1px 0 black,
+		 1px  1px 0 black;
 }
+
 
 .nav-button:hover {
 	background-color: var(--colour-primary-hover);

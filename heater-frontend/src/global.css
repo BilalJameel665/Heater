@@ -11,7 +11,7 @@
 	--colour-background: #FFFFFF;
 	--colour-surface: #bdcedf;
 
-	--colour-primary: #2882e2;
+	--colour-primary: linear-gradient(to bottom right,red, orange);
 	--colour-primary-hover: #287bd4;
 
 	--colour-secondary: #6c757d;
@@ -22,6 +22,8 @@
 	
 	--colour-danger: #dc3545;
 	--colour-danger-hover: #b93c49;
+
+	font-family:Arial, Helvetica, sans-serif;
 
 }
 
