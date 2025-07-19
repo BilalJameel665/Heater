@@ -12,7 +12,7 @@
 .nav-button {
 	display: inline-block;
 	text-decoration: none;
-	border-radius: 10px;
+	border-radius: var(--border-r);
 	color: var(--text-colour)
 }
 

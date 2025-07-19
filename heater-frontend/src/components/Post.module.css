@@ -1,8 +1,22 @@
 .post-con {
 	display: flex;
 	flex-direction: column;
+	border: black solid 5px;
+
+	width: 500px;
+	border-radius: var(--border-r);
+	padding: 15px 30px;
 }
 
 .post-header {
+	justify-content: space-between;
 	display: flex;
+	align-items: center;
+}
+
+.post-options {
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
