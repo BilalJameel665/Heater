@@ -31,7 +31,6 @@
 
 
 
-
 main {
 	display: flex;
 	align-items: center;
@@ -39,8 +38,9 @@ main {
 }
 
 button {
-	font-family: inherit;
-	border: none;
+	all: unset;
+
+	text-align: center;
 }
 
 input {
