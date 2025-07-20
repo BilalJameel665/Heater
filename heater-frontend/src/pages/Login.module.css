@@ -5,10 +5,16 @@
     height: 50vh;
 
 }
-.loginForm {
-	background-color: white;
+.loginForm form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+.loginForm{
+    background-color: white;
 	padding: 2rem;
-	border-radius: 12px;
+	border-radius: var(--border-r);
 	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 	width: 100%;
 	max-width: 400px;
@@ -17,17 +23,20 @@
 .loginHeaderText{
     color: black;
     text-align: center;
+    padding: 1rem;
 }
-.LoginEmailInput,
-.LoginPasswordInput {
+.loginEmailInput,
+.loginPasswordInput {
 	width: 100%;
-	padding: 12px;
+	padding: 12px 16px;
 	margin-bottom: 1rem;
-	border: 1px solid #ccc;
-	border-radius: 8px;
+	border: none;
+	border-radius: 9999px;
+	background-color: #eff3f4;
 	font-size: 1rem;
 	box-sizing: border-box;
-	transition: border-color 0.3s ease;
+	transition: all 0.2s ease;
+	outline: none;
 }
 .loginErrorMessage {
 	color: #dc2626;
@@ -53,6 +62,7 @@
 	color: white;
 }
 .loginPageButton:hover {
+    align-self: center;
     background-color: var(--colour-primary-hover);
 	transform: translateY(-1px);
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);

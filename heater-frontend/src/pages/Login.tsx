@@ -37,8 +37,8 @@ export default function Login() {
 return (
 		<div className={styles["loginModule"]}>
 			<div className={styles["loginForm"]}>
-				<h1 className={styles["loginHeaderText"]}>Login</h1>
 				<form onSubmit={handleLogin}>
+					<h1 className={styles["loginHeaderText"]}>Login</h1>
 					<input
 						type="email"
 						name="email"
