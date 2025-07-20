@@ -88,6 +88,5 @@
 	text-decoration: none;
 }
 .signup-link:hover{
-	transform: translateY(-1px);
 	color: dimgray;
 }

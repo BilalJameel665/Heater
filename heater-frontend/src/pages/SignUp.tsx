@@ -1,9 +1,24 @@
 import { useState } from 'react';
-import styles from "./Signup.module.css";
+import styles from "./SignUp.module.css";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { Link } from 'react-router';
 export default function SignUp() {
-	const [values, setValues] = useState({ email: "", username:"", dob: "",password: "", confirmedPassword: ""});
-	const [error, setError]= useState("");
+	const [values, setValues] = useState<{
+		email: string;
+		username: string;
+		dob: Date | null;
+		password: string;
+		confirmedPassword: string;
+	}>({
+		email: "",
+		username: "",
+		dob: null,
+		password: "",
+		confirmedPassword: "",
+	});
+
+	const [error, setError] = useState("");
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setValues({ ...values, [e.target.name]: e.target.value });
 	};
@@ -12,27 +27,33 @@ export default function SignUp() {
 		setError("");
 
 		try {
-			const response = await fetch("http://localhost:8000/api/auth/signup", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				credentials: "include", 
-				body: JSON.stringify({
-					email: values.email,
-					username: values.username,
-					dob: values.dob,
-					password: values.password,
-					confirmedPassword: values.confirmedPassword,
 
-				}),
-			});
+			if (values.password == values.confirmedPassword) {
+				const response = await fetch("http://localhost:8000/api/auth/signup", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					credentials: "include",
+					body: JSON.stringify({
+						email: values.email,
+						username: values.username,
+						dob: values.dob,
+						password: values.password,
+						confirmedPassword: values.confirmedPassword,
 
-			if (response.ok) {
-				console.log("SignUp successful");
-			} else {
-				const data = await response.json();
-				setError(data.message || "SignUp failed");
+					}),
+				});
+
+				if (response.ok) {
+					console.log("SignUp successful");
+				} else {
+					const data = await response.json();
+					setError(data.message || "SignUp failed");
+				}
+			}
+			else{
+				setError("Passwords do not match");
 			}
 		} catch (err) {
 			setError("Network error");
@@ -49,25 +70,28 @@ export default function SignUp() {
 						placeholder="Email"
 						value={values.email}
 						onChange={handleChange}
-						className= {styles["signup-email"]}
+						className={styles["signup-email"]}
 						required
 					/>
 					<input
-						type="username"
+						type="text"
 						name="username"
 						placeholder="Username"
 						value={values.username}
 						onChange={handleChange}
-						className= {styles["signup-username"]}
+						className={styles["signup-username"]}
 						required
 					/>
-					<input
-						type="dob"
-						name="dob"
-						placeholder="mm/dd/yyyy"
-						value={values.dob}
-						onChange={handleChange}
-						className= {styles["signup-dob"]}
+					<DatePicker
+						selected={values.dob}
+						onChange={(date) => setValues({ ...values, dob: date })}
+						dateFormat="MM-dd-yyyy"
+						placeholderText="Date of birth (mm-dd-yyyy)"
+						maxDate={new Date()}
+						className={styles["signup-dob"]}
+						showYearDropdown
+						scrollableYearDropdown
+						yearDropdownItemNumber={100}
 						required
 					/>
 					<input
@@ -76,19 +100,19 @@ export default function SignUp() {
 						placeholder="Password"
 						value={values.password}
 						onChange={handleChange}
-						className= {styles["signup-password"]}
+						className={styles["signup-password"]}
 						required
 					/>
-										<input
-						type="confirmedPassword"
+					<input
+						type="password"
 						name="confirmedPassword"
 						placeholder="Confirm Password"
 						value={values.confirmedPassword}
 						onChange={handleChange}
-						className= {styles["signup-password-confirmation"]}
+						className={styles["signup-password-confirmation"]}
 						required
 					/>
-					{error && <p className= {styles["signup-error-message"]}>{error}</p>}
+					{error && <p className={styles["signup-error-message"]}>{error}</p>}
 					<button
 						type="submit"
 						className={styles["signup-submit-button"]}
