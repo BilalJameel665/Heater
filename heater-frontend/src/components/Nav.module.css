@@ -12,7 +12,7 @@
 .nav-button {
 	display: inline-block;
 	text-decoration: none;
-	border-radius: var(--border-r);
+	border-radius: 10px;
 	color: var(--text-colour)
 }
 
@@ -25,11 +25,7 @@
 	padding: 10px 0;
 	background-image: var(--colour-primary);
 	color: white;
-	text-shadow:
-		-1px -1px 0 black,
-		 1px -1px 0 black,
-		-1px  1px 0 black,
-		 1px  1px 0 black;
+
 }
 
 
