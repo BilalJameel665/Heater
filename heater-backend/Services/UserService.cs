@@ -40,7 +40,6 @@ public class UserService(HeaterDbContext _db)
         }
         var hasher = new PasswordHasher<User>();
         var result = hasher.VerifyHashedPassword(user, user.Password, Password);
-
         Console.WriteLine($"Verification result: {result}");
 
         return result == PasswordVerificationResult.Success ? user : null;

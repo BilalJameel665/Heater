@@ -29,7 +29,7 @@ export default function SignUp() {
 		try {
 
 			if (values.password == values.confirmedPassword) {
-				const response = await fetch("http://localhost:8000/api/auth/signup", {
+				const response = await fetch("/api/auth/user", {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
@@ -119,7 +119,7 @@ export default function SignUp() {
 					>
 						Register
 					</button>
-					<Link to="/signup" className={styles["login-link"]}>Already have an account?</Link>
+					<Link to="/login" className={styles["login-link"]}>Already have an account?</Link>
 				</form>
 			</div>
 		</div>
