@@ -1,0 +1,70 @@
+.loginModule{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+
+}
+.loginForm form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+.loginForm{
+    background-color: white;
+	padding: 2rem;
+	border-radius: var(--border-r);
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+	width: 100%;
+	max-width: 400px;
+	box-sizing: border-box;
+}
+.loginHeaderText{
+    color: black;
+    text-align: center;
+    padding: 1rem;
+}
+.loginEmailInput,
+.loginPasswordInput {
+	width: 100%;
+	padding: 12px 16px;
+	margin-bottom: 1rem;
+	border: none;
+	border-radius: 9999px;
+	background-color: #eff3f4;
+	font-size: 1rem;
+	box-sizing: border-box;
+	transition: all 0.2s ease;
+	outline: none;
+}
+.loginErrorMessage {
+	color: #dc2626;
+	font-size: 0.9rem;
+	margin-bottom: 1rem;
+	text-align: center;
+}
+.loginPageButton{
+    display: inline-block;
+	text-decoration: none;
+	border-radius: var(--border-r);
+	color: var(--text-colour);
+    border-color: none;
+}
+.loginPageButton{
+	display: inline-block;
+	width: fit-content;
+	min-width: 110px;
+	text-align: center;
+	font-weight: 600;
+	padding: 10px 0;
+	background-image: var(--colour-primary);
+	color: white;
+}
+.loginPageButton:hover {
+    align-self: center;
+    background-color: var(--colour-primary-hover);
+	transform: translateY(-1px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
