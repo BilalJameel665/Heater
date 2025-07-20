@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styles from "./Login.module.css";
+import { Link } from 'react-router';
 export default function Login() {
 	const [values, setValues] = useState({ email: "", password: ""});
 	const [error, setError]= useState("");
@@ -11,7 +12,7 @@ export default function Login() {
 		setError("");
 
 		try {
-			const response = await fetch("http://localhost:8000/api/login", {
+			const response = await fetch("http://localhost:8000/api/auth/login", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -35,17 +36,17 @@ export default function Login() {
 	};
 
 return (
-		<div className={styles["loginModule"]}>
-			<div className={styles["loginForm"]}>
+		<div className={styles["login-module"]}>
+			<div className={styles["login-form"]}>
 				<form onSubmit={handleLogin}>
-					<h1 className={styles["loginHeaderText"]}>Login</h1>
+					<h1 className={styles["login-header-text"]}>Login</h1>
 					<input
 						type="email"
 						name="email"
 						placeholder="Email"
 						value={values.email}
 						onChange={handleChange}
-						className= {styles["loginEmailInput"]}
+						className= {styles["login-email"]}
 						required
 					/>
 					<input
@@ -54,16 +55,17 @@ return (
 						placeholder="Password"
 						value={values.password}
 						onChange={handleChange}
-						className= {styles["loginPasswordInput"]}
+						className= {styles["login-password"]}
 						required
 					/>
-					{error && <p className= {styles["loginErrorMessage"]}>{error}</p>}
+					{error && <p className= {styles["login-error-message"]}>{error}</p>}
 					<button
 						type="submit"
-						className={styles["loginPageButton"]}
+						className={styles["login-submit-button"]}
 					>
 						Log In
 					</button>
+					<Link to="/signup" className={styles["signup-link"]}>Create an account?</Link>
 				</form>
 			</div>
 		</div>
