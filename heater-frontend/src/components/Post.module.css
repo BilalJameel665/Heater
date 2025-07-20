@@ -30,7 +30,6 @@
 
 .post-analytics button,
 .post-options button {
-	user-select: none;
 	color: var(--colour-accent);
 }
 

@@ -53,6 +53,11 @@ textarea {
 	border: none;
 }
 
+textarea::placeholder, input::placeholder, button {
+	user-select: none;
+	-webkit-user-select: none;
+}
+
 .dark-theme {
 	/* Change global colour variables for dark theme */
 	/* --colour-background: #FFFFFF;
