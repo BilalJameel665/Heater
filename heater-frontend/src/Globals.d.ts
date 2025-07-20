@@ -11,6 +11,7 @@ declare module '*.svg' {
 
 
 type Post = {
+	id: number;
 	text: string;
 	author: string;
 	metrics: {[key: string]: number};

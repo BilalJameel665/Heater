@@ -1,21 +1,24 @@
-hr {
-	margin: 1px 0;
-}
-
 .post-con {
 	display: flex;
 	flex-direction: column;
-	border: var(--colour-accent) solid 2px;
 
+	border-top: var(--colour-accent) solid 2px;
+	border-bottom: var(--colour-accent) solid 2px;
+
+	margin-bottom: -2px;
 	gap: 15px;
-	border-radius: var(--border-r);
 	padding: 15px 20px;
 }
+
 
 .post-header {
 	justify-content: space-between;
 	display: flex;
 	align-items: center;
+}
+
+.post-author {
+	font-weight: 700;
 }
 
 .post-options {
@@ -24,8 +27,16 @@ hr {
 	align-items: center;
 	justify-content: center;
 }
-.post-analytics span, .post-options {
-	user-select: none;
+
+.post-analytics button,
+.post-options button {
+	color: var(--colour-accent);
+}
+
+.post-analytics button:hover,
+.post-options button:hover {
+	color: var(--colour-primary);
+	cursor: pointer;
 }
 
 .post-analytics {
@@ -33,20 +44,15 @@ hr {
 	justify-content: space-between;
 }
 
-.post-analytics span {
-	color: var(--colour-accent);
+.post-analytics button {
 	display: inline-flex;
 	align-items: center;
 	gap: 2.5px;
 }
 
-.post-analytics span:hover {
-	color: var(--colour-primary);
-	/* color: #838080; */
-	cursor: pointer;
-}
 
-.post-analytics span svg {
+
+.post-analytics button svg,
+.post-options button svg {
 	fill: currentColor;
 }
-

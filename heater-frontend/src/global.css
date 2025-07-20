@@ -31,7 +31,6 @@
 
 
 
-
 main {
 	display: flex;
 	align-items: center;
@@ -39,8 +38,9 @@ main {
 }
 
 button {
-	font-family: inherit;
-	border: none;
+	all: unset;
+
+	text-align: center;
 }
 
 input {
@@ -51,6 +51,11 @@ textarea {
 	font-family: inherit;
 	font-size: inherit;
 	border: none;
+}
+
+textarea::placeholder, input::placeholder, button {
+	user-select: none;
+	-webkit-user-select: none;
 }
 
 .dark-theme {
