@@ -1,0 +1,31 @@
+.home-con {
+	width: 650px;
+	text-align: center;
+}
+
+.post-form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 15px;
+	margin-bottom: 20px;
+}
+
+.post-form textarea {
+	padding: 10px;
+	width: 100%;
+	height: 70px;
+	border-radius: var(--border-r);
+	resize: none;
+}
+
+.post-form button {
+	border-radius: var(--border-r);
+	background-color: var(--colour-secondary);
+	font-size: 1.2rem;
+	padding: 10px 30px;
+}
+
+.post-form button:hover {
+	background-color: var(--colour-secondary-hover);
+}

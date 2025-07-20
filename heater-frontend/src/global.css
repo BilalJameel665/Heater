@@ -14,19 +14,29 @@
 	--colour-primary: linear-gradient(to bottom right,red, orange);
 	--colour-primary-hover: #287bd4;
 
-	--colour-secondary: #6c757d;
-	--colour-secondary-hover: #53606b;
+	--colour-secondary: #aab5be;
+	--colour-secondary-hover: #60778b;
 
-	--colour-accent: #e83e8c;
-	--colour-accent-hover: #b14075;
+	--colour-accent: #a87d91;
+	--colour-accent-hover: #7a465e;
 	
 	--colour-danger: #dc3545;
 	--colour-danger-hover: #b93c49;
 
-	font-family:Arial, Helvetica, sans-serif;
+	font-family: "Arial", "Helvetica", "sans-serif" !important;
 
 
 	--border-r: 10px;
+}
+
+button {
+	font-family: inherit;
+}
+
+main {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
 }
 
 .dark-theme {

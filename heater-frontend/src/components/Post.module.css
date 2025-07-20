@@ -1,11 +1,15 @@
+hr {
+	margin: 1px 0;
+}
+
 .post-con {
 	display: flex;
 	flex-direction: column;
-	border: black solid 5px;
+	border: var(--colour-accent) solid 2px;
 
-	width: 500px;
+	gap: 15px;
 	border-radius: var(--border-r);
-	padding: 15px 30px;
+	padding: 15px 20px;
 }
 
 .post-header {
@@ -20,3 +24,29 @@
 	align-items: center;
 	justify-content: center;
 }
+.post-analytics span, .post-options {
+	user-select: none;
+}
+
+.post-analytics {
+	display: flex;
+	justify-content: space-between;
+}
+
+.post-analytics span {
+	color: var(--colour-accent);
+	display: inline-flex;
+	align-items: center;
+	gap: 2.5px;
+}
+
+.post-analytics span:hover {
+	color: var(--colour-primary);
+	/* color: #838080; */
+	cursor: pointer;
+}
+
+.post-analytics span svg {
+	fill: currentColor;
+}
+
