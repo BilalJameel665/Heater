@@ -4,7 +4,6 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	border: none;
 }
 
 :root {
@@ -12,7 +11,7 @@
 	--colour-background: #FFFFFF;
 	--colour-surface: #bdcedf;
 
-	--colour-primary: linear-gradient(to bottom right,red, orange);
+	--colour-primary: linear-gradient(to bottom right, red, orange);
 	--colour-primary-hover: #287bd4;
 
 	--colour-secondary: #aab5be;
@@ -20,7 +19,7 @@
 
 	--colour-accent: #a87d91;
 	--colour-accent-hover: #7a465e;
-	
+
 	--colour-danger: #dc3545;
 	--colour-danger-hover: #b93c49;
 
@@ -30,14 +29,28 @@
 	--border-r: 10px;
 }
 
-button {
-	font-family: inherit;
-}
+
+
 
 main {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
+}
+
+button {
+	font-family: inherit;
+	border: none;
+}
+
+input {
+	border: none;
+}
+
+textarea {
+	font-family: inherit;
+	font-size: inherit;
+	border: none;
 }
 
 .dark-theme {
@@ -57,5 +70,5 @@ main {
 	--colour-danger: #dc3545;
 	--colour-danger-hover: #b93c49; */
 
-	
+
 }
