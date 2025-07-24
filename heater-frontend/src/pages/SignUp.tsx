@@ -29,7 +29,7 @@ export default function SignUp() {
 		try {
 
 			if (values.password == values.confirmedPassword) {
-				const response = await fetch("/api/auth/user", {
+				const response = await fetch("/api/auth/users", {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
