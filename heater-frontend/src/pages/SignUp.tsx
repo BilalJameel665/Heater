@@ -29,7 +29,7 @@ export default function SignUp() {
 		try {
 
 			if (values.password == values.confirmedPassword) {
-				const response = await fetch("/api/auth/users", {
+				const response = await fetch("/api/users", {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
@@ -40,7 +40,6 @@ export default function SignUp() {
 						username: values.username,
 						dob: values.dob,
 						password: values.password,
-						confirmedPassword: values.confirmedPassword,
 
 					}),
 				});
