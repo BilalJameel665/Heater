@@ -184,7 +184,6 @@ app.MapPost("/api/posts/", async (Post post, PostService postService) =>
 	{
 		return Results.BadRequest(new { error = "Could not create post" });
 	}
-
 });
 
 app.MapPut("/api/posts/{id}", async (string id, Post post, PostService postService) =>
@@ -227,6 +226,38 @@ app.MapDelete("/api/posts/{id}", async (string id, PostService postService) =>
 	}
 
 });
+
+
+app.MapGet("/api/posts/{id}/comments", async (string id, PostService postService) =>
+{
+	try
+	{
+		var post = await postService.GetPostAsync(id);
+
+		if (post == null)
+		{
+			return Results.NotFound(new { error = $"Post with {id} doesn't exist" });
+		}
+
+		var comments = await postService.GetPostCommentsAsync(post);
+
+		if (comments == null)
+		{
+			return Results.NotFound(new { error = $"There are no comments for post {id}" });
+		}
+		
+		return Results.Ok(comments);
+	}
+	catch
+	{
+		return Results.BadRequest(new { error = "Could not get comments" });
+	}
+});
+
+
+
+
+
 
 app.MapFallback((context) =>
 {

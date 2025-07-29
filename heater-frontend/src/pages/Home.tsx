@@ -1,5 +1,6 @@
 import Post from "../components/Post";
 import styles from "./Home.module.css"
+import PostButton from "../components/PostButton";
 
 export default function Home() {
 	const post : Post = {
@@ -23,7 +24,7 @@ export default function Home() {
 			</div>
 			<form className={styles["post-form"]}>
 				<textarea placeholder="Create a post"></textarea>
-				<button>Post</button>
+				<PostButton>Post</PostButton>
 			</form>
 			<div className={styles["posts-con"]}>
 				{posts.map((post, index) => (

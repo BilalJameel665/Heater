@@ -23,7 +23,7 @@ namespace heater_backend.Models
 		[Required]
 		public Metrics Metrics { get; set; } = new Metrics();
 
-		public ICollection<Comment> Comments { get; set; } = [];
+		public string? ParentId { get; set; } = null;
 	}
 
 
@@ -41,13 +41,5 @@ namespace heater_backend.Models
 		[Required]
 		public int Dislikes { get; set; } = 0;
 	}
-
-
-	public class Comment : Post
-	{
-		[Required]
-		public required Post ParentPost { get; set; }
-	}
-
 }
 
