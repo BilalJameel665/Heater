@@ -119,6 +119,8 @@ app.MapPost("/api/auth/login", async (User user, UserService userService) =>
         return Results.Unauthorized();
 
 	// REPLACE THIS WITH A TOKEN RETURN
+	 //var token = JwtTokenGenerator.GenerateToken(user);
+	 //return Results.OK(new{token});
 	return Results.Ok(new { loginUser.Id, loginUser.Username, loginUser.Email, loginUser.Password });
 });
 
