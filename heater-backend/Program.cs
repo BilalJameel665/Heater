@@ -3,10 +3,32 @@ using heater_backend.Services;
 using heater_backend.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
+//jwt authentication stuff
 var builder = WebApplication.CreateBuilder(args);
+var jwtKey = builder.Configuration["Jwt:Key"];
+var jwtIssuer = builder.Configuration["Jwt:Issuer"];
 
-
+builder.Services.AddAuthentication(options =>
+{
+	options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+	options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+	options.TokenValidationParameters = new TokenValidationParameters
+	{
+		ValidateIssuer = true,
+		ValidateAudience = true,
+		ValidateLifetime = true,
+		ValidateIssuerSigningKey = true,
+		ValidIssuer = jwtIssuer,
+		ValidAudience = jwtIssuer,
+		IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
+	};
+});
 
 builder.Services.AddDbContext<HeaterDbContext>(options =>
 	options.UseNpgsql(builder.Configuration["ConnectionStrings:DefaultConnection"])
@@ -14,9 +36,12 @@ builder.Services.AddDbContext<HeaterDbContext>(options =>
 
 builder.Services.AddScoped<PostService>();
 builder.Services.AddScoped<UserService>();
-
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
+//enabling jwt
+app.UseAuthentication();
+app.UseAuthorization();
 
 if (app.Environment.IsProduction())
 {
@@ -39,14 +64,24 @@ app.UseStaticFiles(new StaticFileOptions
 	RequestPath = ""
 });
 
+//this is the route for authorization  
+app.MapGet("/api/users/me", (HttpContext http, UserService userService) =>
+{
+	var userId = http.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+	return Results.Ok(new { userId });
+})
+.RequireAuthorization();
+
 
 //This route is for Creating user
 app.MapPost("/api/users", async (User user, UserService userService) =>
 {
 	try
-	{   
+	{
 		var newUser = await userService.CreateUserAsync(user);
+		Console.WriteLine(newUser.Username);
 		return Results.Created($"/api/users/{newUser.Id}", newUser);
+		
 	}
 	catch (Exception ex)
 	{
@@ -110,18 +145,14 @@ app.MapDelete("/api/users/{id}", async (Guid id, UserService userService) =>
 });
 
 // this is the route to authenticate/login a user 
-app.MapPost("/api/auth/login", async (User user, UserService userService) =>
+app.MapPost("/api/auth/login", async (User user, UserService userService, IConfiguration config) =>
 {
-    var loginUser = await userService.AuthenticateUserAsyncLogin(user.Email, user.Password);
-	Console.WriteLine("hello this is the test");
-	Console.WriteLine(user.Password);
-    if (loginUser == null)
-        return Results.Unauthorized();
+	var loginUser = await userService.AuthenticateUserAsyncLogin(user.Email, user.Password);
+	if (loginUser == null)
+		return Results.Unauthorized();
 
-	// REPLACE THIS WITH A TOKEN RETURN
-	 //var token = JwtTokenGenerator.GenerateToken(user);
-	 //return Results.OK(new{token});
-	return Results.Ok(new { loginUser.Id, loginUser.Username, loginUser.Email, loginUser.Password });
+	var token = JwtTokenGen.JwtTokenGenerator(loginUser, config);
+	return Results.Ok(new { token });
 });
 
 app.MapGet("/api/posts/{id}", async (string id, PostService postService) =>
