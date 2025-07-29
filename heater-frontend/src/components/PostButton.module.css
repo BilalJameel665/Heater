@@ -1,0 +1,11 @@
+.post-button {
+	border-radius: var(--border-r);
+	background-color: var(--colour-secondary);
+	font-size: 1.2rem;
+	padding: 10px 30px;
+	cursor: pointer;
+}
+
+.post-button:hover {
+	background-color: var(--colour-secondary-hover);
+}

@@ -15,5 +15,5 @@ type Post = {
 	text: string;
 	author: string;
 	metrics: {[key: string]: number};
+	parentId?: number;
 };
-

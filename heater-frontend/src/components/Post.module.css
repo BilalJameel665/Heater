@@ -10,6 +10,17 @@
 	padding: 15px 20px;
 }
 
+.comment-con {
+	display: flex;
+	flex-direction: column;
+
+	border-top: var(--colour-accent) solid 2px;
+	border-bottom: var(--colour-accent) solid 2px;
+
+	margin-bottom: -2px;
+	gap: 15px;
+	padding: 15px 0;
+}
 
 .post-header {
 	justify-content: space-between;
@@ -55,4 +66,20 @@
 .post-analytics button svg,
 .post-options button svg {
 	fill: currentColor;
+}
+
+.comment-form-con {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px 10px;
+}
+
+.comment-form-con textarea{
+	border: var(--colour-accent) solid 2px;
+	padding: 10px;
+	width: 70%;
+	height: 70px;
+	border-radius: var(--border-r);
+	resize: none;
 }
