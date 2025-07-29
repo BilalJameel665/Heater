@@ -1,4 +1,3 @@
-
 using heater_backend.Data;
 using heater_backend.Models;
 using Microsoft.EntityFrameworkCore;
@@ -37,6 +36,11 @@ namespace heater_backend.Services
 			_db.Posts.Update(post);
 			await _db.SaveChangesAsync();
 			return post;
+		}
+
+		public async Task<ICollection<Post>> GetPostCommentsAsync(Post post)
+		{
+			return await _db.Posts.Where(p => p.ParentId == post.Id).ToListAsync();
 		}
 
 
